@@ -1,6 +1,6 @@
 # Generic midi controller and note player
 # adapted from https://learn.adafruit.com/adafruit-macropad-rp2040/macropad-midi
-# updated 5/26/22
+# updated 7/1/22
 
 from adafruit_macropad import MacroPad
 from rainbowio import colorwheel
@@ -31,7 +31,7 @@ last_knob_pos = macropad.encoder #get encoder value
 octave = 0 # octave offset, default to middle C
 wiggle = [0] * 12 # set the base control change value to 0 for each controller
 key_active = [False] * 12 # set whether a key is held down active; default to inactive
-MIDI_CHANNEL = 0 # midi channel set to 0 (automtically sends 1)
+MIDI_CHANNEL = 0 # midi channel set to 0 (automatically sends 1)
 
 # colors #
 macropad.pixels.brightness = 0.125
@@ -64,7 +64,7 @@ while True:
             if key_event.pressed:  # press key for active/editable controller
                 macropad.pixels[num] = hotpink
                 key_active[num] = True
-                text_lines[1].text = ("       CC %d: %d" % (CCNUM[num], wiggle[num]))  # show CC number and output value
+                text_lines[1].text = ("       CC %d: %d" % (CCNUM[num], int(wiggle[num]*4.1)))  # show CC number and output value
 
             if key_event.released:  # release key for no active controller
                 macropad.pixels[num] = colorwheel(num*10)
